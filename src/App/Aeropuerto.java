@@ -1,9 +1,15 @@
+package App;
 import java.util.LinkedList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Queue;
 
 import javax.swing.JOptionPane;
+
+import Visuals.Autorizar;
+import Visuals.AutorizarPrioridad;
+import Visuals.DatosAterrizaje;
+import Visuals.DatosDespege;
 
 public class Aeropuerto {
 	String nombre;
@@ -24,39 +30,39 @@ public class Aeropuerto {
 	}
 	
 	public void soliAterrizaje() {
-		Avion nuevo_avion = pedirDatos("Procedencia");
+		DatosAterrizaje nuevo_avion = new DatosAterrizaje("Procedencia", aterrizaje, aterri_prioridad);
 		
-		if(nuevo_avion.getPrioridad().equals("s"))
-			aterri_prioridad.add(nuevo_avion);
-		else
-			aterrizaje.add(nuevo_avion);
 	}
 	
 	public void soliDespegue() {
-		Avion nuevo_avion = pedirDatos("Destino");
-		
-		despege.add(nuevo_avion);
+		DatosDespege nuevo_avion = new DatosDespege("Destino", despege);
+
 	}
 	
 	public void ejecutarSolicitud() {
 		if(!aterri_prioridad.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Hay aviones con prioridad de aterrizaje");
-			opcion(aterri_prioridad,aterri_prioridad.peek(),"Aterrizaje de emergencia");
+			/*JOptionPane.showMessageDialog(null, "Hay aviones con prioridad de aterrizaje");
+			opcion(aterri_prioridad,aterri_prioridad.peek(),"Aterrizaje de emergencia");*/
+			AutorizarPrioridad ventana_prio = new AutorizarPrioridad(aterri_prioridad,mi_regis); 
 			
 		}else {
 			if(alter == 1 && !despege.isEmpty()) {
-				opcion(despege, despege.peek(), "despegar");
+				//opcion(despege, despege.peek(), "despegar");
+				Autorizar ventana_des = new Autorizar(despege,mi_regis,"despegar"); 
 				
 				if(!aterri_prioridad.isEmpty())
 					alter = 0;
 			}else if(alter == 0 && !aterrizaje.isEmpty()) {
-				opcion(aterrizaje, aterrizaje.peek(), "aterrizar");
+				//opcion(aterrizaje, aterrizaje.peek(), "aterrizar");
+				Autorizar ventana_ate = new Autorizar(aterrizaje,mi_regis,"aterrizar"); 
 				if(!despege.isEmpty())
 					alter = 1;
 			}else if(alter == 1 && aterrizaje.isEmpty() && !despege.isEmpty()) {
-				opcion(despege, despege.peek(), "despegar");
+				//opcion(despege, despege.peek(), "despegar");
+				Autorizar ventana_des = new Autorizar(despege,mi_regis,"despegar"); 
 			}else if(alter == 1 && !aterrizaje.isEmpty() && despege.isEmpty()) {
-				opcion(aterrizaje, aterrizaje.peek(), "aterrizar");
+				//opcion(aterrizaje, aterrizaje.peek(), "aterrizar");
+				Autorizar ventana_ate = new Autorizar(aterrizaje,mi_regis,"aterrizar"); 
 			}else if(despege.isEmpty() && aterrizaje.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "No quedan mas solicitudes");
 			}
@@ -97,7 +103,8 @@ public class Aeropuerto {
 				
 	}
 		
-	public Avion pedirDatos(String prodes) {
+	/*public Avion pedirDatos(String prodes) {
+		DatosVisual nuevoAvion = new DatosVisual(prodes);
 		
 		LocalDateTime tiempo = LocalDateTime.now();
 		String cod = JOptionPane.showInputDialog("Introduce un codigo:");
@@ -109,8 +116,8 @@ public class Aeropuerto {
 			}while(!prio.equals("s") && !prio.equals("n"));
 		}else
 			prio = null;
-		return new Avion(cod,tiempo.toString(),procedencia,prio);
+		return nuevoAvion.getAvion();
 		
-	}
+	}*/
 	
 }
