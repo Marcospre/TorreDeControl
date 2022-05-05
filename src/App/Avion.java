@@ -6,10 +6,10 @@ public class Avion {
 	
 	String codigo_avion;
 	String fecha_soli;
-	LocalDateTime fecha_eje; 
+	LocalDateTime fecha_eje;    /* fecha de la solicitud */
 	String proce_desti;
 	String prioridad;
-	DateTimeFormatter f = DateTimeFormatter.ofPattern("YYYY/MM/dd hh:mm:ss");
+	DateTimeFormatter f = DateTimeFormatter.ofPattern("YYYY/MM/dd hh:mm:ss");  /* Formato de visualizacion para las fechas */
 	
 	public Avion(String codigo_avion, String fecha, String pro, String prio) {
 		this.codigo_avion = codigo_avion;

@@ -6,6 +6,7 @@ import java.util.Queue;
 
 import javax.swing.JOptionPane;
 
+import Cola.Cola;
 import Visuals.Autorizar;
 import Visuals.AutorizarPrioridad;
 import Visuals.DatosAterrizaje;
@@ -17,28 +18,35 @@ public class Aeropuerto {
 	Registro mi_regis;
 	DateTimeFormatter f = DateTimeFormatter.ofPattern("YYYY/MM/dd hh:mm:ss");
 	
-	Queue<Avion> aterrizaje;
-	Queue<Avion> despege;
-	Queue<Avion> aterri_prioridad;
+	Cola<Avion> aterrizaje;   /* cola con los aviones a aterrizar */
+	Cola<Avion> despege;      /* cola con los aviones a despegar */
+	Cola<Avion> aterri_prioridad;   /* cola con los aviones con prioridad */
 	
 	public Aeropuerto(String nombre, Registro regis) {
 		this.nombre = nombre;
-		this.aterrizaje = new LinkedList<Avion>();
-		this.despege = new LinkedList<Avion>();
-		this.aterri_prioridad = new LinkedList<Avion>();
+		this.aterrizaje = new Cola<Avion>();
+		this.despege = new Cola<Avion>();
+		this.aterri_prioridad = new Cola<Avion>();
 		this.mi_regis = regis;
 	}
 	
+	/* Metodo que abre la intefaz para recoger los datos del avion que va aterrizar */
 	public void soliAterrizaje() {
 		DatosAterrizaje nuevo_avion = new DatosAterrizaje("Procedencia", aterrizaje, aterri_prioridad);
 		
 	}
 	
+	/* Metodo que abre la interfaz para recoger los datos del avion a despegar */
 	public void soliDespegue() {
 		DatosDespege nuevo_avion = new DatosDespege("Destino", despege);
 
 	}
 	
+	/* Metodo que ejecuta la solicitud de autorizar un aterrizaje o despegue.
+	 * El metodo abrira la interfaz de autorizar o autorizarPrioridad dependiendo
+	 * de si el avion tiene prioridad o no. Ademas ira alternando entre las colas de aterrizaje 
+	 * y despegue
+	 */
 	public void ejecutarSolicitud() {
 		if(!aterri_prioridad.isEmpty()) {
 			/*JOptionPane.showMessageDialog(null, "Hay aviones con prioridad de aterrizaje");

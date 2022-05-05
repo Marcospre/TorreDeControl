@@ -15,10 +15,11 @@ import javax.swing.JTextArea;
 
 import App.Avion;
 import App.Registro;
+import Cola.Cola;
 
 public class Autorizar implements ActionListener {
 	JFrame ventana;
-	private Queue<Avion> cola;
+	private Cola<Avion> cola;
 	private JButton aceptar = new JButton("Aceptar");
 	private JButton cancelar = new JButton("Cancelar");
 	private Avion avion = null;
@@ -26,7 +27,7 @@ public class Autorizar implements ActionListener {
 	private Registro mi_regis;
 	DateTimeFormatter f = DateTimeFormatter.ofPattern("YYYY/MM/dd hh:mm:ss");
 	
-	public Autorizar(Queue<Avion> cola, Registro regis, String ope) {
+	public Autorizar(Cola<Avion> cola, Registro regis, String ope) {
 		ventana = new JFrame(ope);
 		this.cola = cola;
 		avion = cola.peek();
@@ -35,6 +36,7 @@ public class Autorizar implements ActionListener {
 		menuAutori();
 	}
 	
+	/* Metodo que muestra por pantalla la interfaz del menu */
 	public void menuAutori() {
 			
 			ventana.setBounds(100, 100, 700, 300);
@@ -64,6 +66,11 @@ public class Autorizar implements ActionListener {
 			
 		}
 	
+	/* Metodo que registra la accion que se ha ejecutado en el menu.
+	 * Si se acepta se eliminara el avion de la cola y mostrar un JText 
+	 * con la informacion de la operacion que ha realizado el avion. Tambien
+	 * se escribe toda esta informacion en el archivo de texto.
+	 */
 	public void actionPerformed(ActionEvent click) {
 		switch(click.getActionCommand()) {
 		case "Aceptar":

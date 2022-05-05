@@ -2,6 +2,7 @@ package Visuals;
 import javax.swing.*;
 
 import App.Avion;
+import Cola.Cola;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,17 +23,21 @@ public class DatosAterrizaje implements ActionListener{
 		private String prodes = null;
 		private JRadioButton rb1;
 		private JRadioButton rb2;
-		private Queue<Avion> aterrizaje;
-		private Queue<Avion> aterri_prioridad;
+		private Cola<Avion> aterrizaje;
+		private Cola<Avion> aterri_prioridad;
 		private Avion nuevoAvion = null;
 		private ButtonGroup buttonGroup = new ButtonGroup();
 		
-		public DatosAterrizaje(String prodes, Queue<Avion> aterrizaje, Queue<Avion> aterri_prioridad ) {
+		public DatosAterrizaje(String prodes, Cola<Avion> aterrizaje, Cola<Avion> aterri_prioridad ) {
 			this.prodes = prodes;
 			this.aterrizaje = aterrizaje;
 			this.aterri_prioridad = aterri_prioridad;
 			mostrarMenuAterrizaje();
 		}
+		
+		/* Metodo que muestra la ventana donde se registra un avion que sea aterrizar.
+		 * Esta ventana da la opcion de elegir si tiene prioridad de aterrizaje o no
+		 */
 		
 		public void mostrarMenuAterrizaje() {
 			
@@ -77,6 +82,10 @@ public class DatosAterrizaje implements ActionListener{
 			ventana.setVisible(true);
 		}
 		
+		/* Metodo que registra la accion que ha seleccionado en el menu anterior.
+		 * En caso de aceptar,  crea un nuevo avion con los datos que se han introducido.
+		 * 
+		 */
 		public void actionPerformed(ActionEvent click) {
 			String cod = null;
 			String procedencia = null;
@@ -103,7 +112,7 @@ public class DatosAterrizaje implements ActionListener{
 					
 					nuevoAvion = new Avion(cod,tiempo.toString(),procedencia,prio);
 					
-					if(nuevoAvion.getPrioridad().equals("s"))
+					if(nuevoAvion.getPrioridad().equals("Si"))
 						aterri_prioridad.add(nuevoAvion);
 					else 
 						aterrizaje.add(nuevoAvion);

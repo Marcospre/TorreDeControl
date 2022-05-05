@@ -2,6 +2,7 @@ package Visuals;
 import javax.swing.*;
 
 import App.Avion;
+import Cola.Cola;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,71 +19,78 @@ public class DatosDespege implements ActionListener{
 		private JTextField txtCodigo = new JTextField();
 		private JTextField txtProdes = new JTextField();
 		private String prodes = null;
-		private Queue<Avion> despege;
+		private Cola<Avion> despege;
 		private Avion nuevoAvion = null;
 		
-		public DatosDespege(String prodes, Queue<Avion> despege ) {
+		public DatosDespege(String prodes, Cola<Avion> despege ) {
 			this.prodes = prodes;
 			this.despege = despege;
 			mostrarMenuDespege();
 		}
+		
+		/* Metodo que muestra la interfaz donde se va a recoger la informacion 
+		 * del avion que ca a despegar.
+		 */
+		public void mostrarMenuDespege() {
+				
+				ventana.setBounds(100, 100, 700, 300);
+				ventana.getContentPane().setLayout(new GridLayout(5, 2, 10, 10));
+				ventana.setLocationRelativeTo(null);
+	
+				JLabel labelCodigo = new JLabel("Codigo:");
+				ventana.getContentPane().add(labelCodigo);
+				ventana.getContentPane().add(txtCodigo);
+				
+				JLabel labelProdes = new JLabel(this.prodes+":");
+				ventana.getContentPane().add(labelProdes);
+				ventana.getContentPane().add(txtProdes);
+				
+				aceptar.addActionListener(this);
+				aceptar.setActionCommand("Aceptar");
+				ventana.getContentPane().add(aceptar);
+				
+				cancelar.addActionListener(this);
+				cancelar.setActionCommand("Cancelar");
+				ventana.getContentPane().add(cancelar);
+				
+				ventana.setVisible(true);
+			}
 			
-	public void mostrarMenuDespege() {
-			
-			ventana.setBounds(100, 100, 700, 300);
-			ventana.getContentPane().setLayout(new GridLayout(5, 2, 10, 10));
-			ventana.setLocationRelativeTo(null);
-
-			JLabel labelCodigo = new JLabel("Codigo:");
-			ventana.getContentPane().add(labelCodigo);
-			ventana.getContentPane().add(txtCodigo);
-			
-			JLabel labelProdes = new JLabel(this.prodes+":");
-			ventana.getContentPane().add(labelProdes);
-			ventana.getContentPane().add(txtProdes);
-			
-			aceptar.addActionListener(this);
-			aceptar.setActionCommand("Aceptar");
-			ventana.getContentPane().add(aceptar);
-			
-			cancelar.addActionListener(this);
-			cancelar.setActionCommand("Cancelar");
-			ventana.getContentPane().add(cancelar);
-			
-			ventana.setVisible(true);
-		}
-
-		public void actionPerformed(ActionEvent click) {
-			String cod = null;
-			String procedencia = null;
-			
-			switch(click.getActionCommand()) {
-			case "Aceptar":
-				try {
-					LocalDateTime tiempo = LocalDateTime.now();
-					cod = txtCodigo.getText();
-					procedencia = txtProdes.getText();
-					
-					if(cod.equals("") || procedencia.equals("")) {
-						throw new Exception("Rellene todos los campos");
+			/* Metodo que recoge la accion que se ha ejecutado en el menu.
+			 * Si se acepta, se recogen todos los datos y se crea un nuevo avion.
+			 * Despues, se añade a la cola de despegue.
+			 */
+			public void actionPerformed(ActionEvent click) {
+				String cod = null;
+				String procedencia = null;
+				
+				switch(click.getActionCommand()) {
+				case "Aceptar":
+					try {
+						LocalDateTime tiempo = LocalDateTime.now();
+						cod = txtCodigo.getText();
+						procedencia = txtProdes.getText();
+						
+						if(cod.equals("") || procedencia.equals("")) {
+							throw new Exception("Rellene todos los campos");
+						}
+						
+						nuevoAvion = new Avion(cod,tiempo.toString(),procedencia,null);
+						despege.add(nuevoAvion);
+						
+						ventana.dispose();
+					}catch(Exception e) {
+						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
 					
-					nuevoAvion = new Avion(cod,tiempo.toString(),procedencia,null);
-					despege.add(nuevoAvion);
-					
+					break;
+				
+				case "Cancelar":
 					ventana.dispose();
-				}catch(Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
+					break;
+					
 				}
-				
-				break;
-			
-			case "Cancelar":
-				ventana.dispose();
-				break;
-				
 			}
-		}
 
 	}
 

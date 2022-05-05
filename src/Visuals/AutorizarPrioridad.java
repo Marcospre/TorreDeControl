@@ -2,6 +2,7 @@ package Visuals;
 
 import App.Avion;
 import App.Registro;
+import Cola.Cola;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -23,7 +24,7 @@ import javax.swing.JTextArea;
 public class AutorizarPrioridad implements ActionListener {
 	
 	JFrame ventana = new JFrame("Avion con prioridad");
-	private Queue<Avion> aterri_prioridad;
+	private Cola<Avion> aterri_prioridad;
 	private JButton aceptar = new JButton("Aceptar");
 	private JButton cancelar = new JButton("Cancelar");
 	private Avion avion = null;
@@ -31,7 +32,7 @@ public class AutorizarPrioridad implements ActionListener {
 	private Registro mi_regis;
 	DateTimeFormatter f = DateTimeFormatter.ofPattern("YYYY/MM/dd hh:mm:ss");
 	
-	public AutorizarPrioridad(Queue<Avion> aterri_prioridad, Registro regis) {
+	public AutorizarPrioridad(Cola<Avion> aterri_prioridad, Registro regis) {
 		this.aterri_prioridad = aterri_prioridad;
 		avion = aterri_prioridad.peek();
 		ope = "Aterrizaje de emergencia";
@@ -39,6 +40,9 @@ public class AutorizarPrioridad implements ActionListener {
 		menuAutori();
 	}
 	
+	/* Metodo que muestra una ventana para avisar que hay un avion con prioridad
+	 * de aterrizaje 
+	 */
 	public void menuAutori() {
 		
 		ventana.setBounds(100, 100, 700, 300);
@@ -67,6 +71,10 @@ public class AutorizarPrioridad implements ActionListener {
 		
 	}
 	
+	/* Metodo que registra la accion del menu anterior. Si se acepta la autorizacion,
+	 * se muestra una ventana con la informacion de la operacion del avion. Ademas, se
+	 * guarda esta informacion en el registro.
+	 */
 	public void actionPerformed(ActionEvent click) {
 		switch(click.getActionCommand()) {
 		case "Aceptar":

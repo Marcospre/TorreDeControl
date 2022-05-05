@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 public class Registro {
 	String titulo;
-	String url;
+	String url;            /* direccion del archivo txt */
 	File file = null;
 	FileWriter fichero_escri = null;
 	BufferedWriter bw = null;
@@ -26,7 +26,11 @@ public class Registro {
 		borrarRegistro();
 		escribirTitulo();
 	}
-
+	
+	/* Metodo que escribe en el fichero de texto una operacion.
+	 * Se le pasa como parametro de entrada el avion que se va registrar
+	 * junto con su operacion realizada
+	 */
 	public void escribirFichero(Avion avion, String ope) {
 		PrintWriter salida = null;
 		
@@ -46,6 +50,7 @@ public class Registro {
 		
 	}
 	
+	/* Metodo que escribe el titulo del fichero de texto */
 	public void escribirTitulo() {
 		
 		PrintWriter salida = null;
@@ -67,6 +72,7 @@ public class Registro {
 		}
 	}
 	
+	/* Metodo que borrar el contenido del archivo de texto */
 	public void borrarRegistro() {
 		try {
 			 
@@ -80,6 +86,7 @@ public class Registro {
 		}
 	}
 	
+	/* Metodo que abre el archivo de texto */
 	public void abrirarchivo(){
 
 	     try {

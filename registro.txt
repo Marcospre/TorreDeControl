@@ -1,2 +1,5 @@
-Operaciones del dia 2022-04-14
+Operaciones del dia 2022-05-05
 
+1A Aterrizaje de emergencia  2022/05/05 01:07:31
+1D despegar                  2022/05/05 01:07:38
+1A aterrizar                 2022/05/05 01:07:41
