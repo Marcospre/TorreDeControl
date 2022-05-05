@@ -18,6 +18,7 @@ public class WindowIntro implements ActionListener {
 		mostrarMenu();
 	}
 	
+	/* Metodo que muestra el menu principal de la aplicacion */
 	public void mostrarMenu() {
 		
 		frame = new JFrame();
@@ -61,7 +62,7 @@ public class WindowIntro implements ActionListener {
 		
 	}
 	
-	
+	/* Metodo que recoge la accion realizada por el usuario */
 	public void actionPerformed(ActionEvent click) {
 		switch(click.getActionCommand()) {
 		
