@@ -84,6 +84,7 @@ public class WindowIntro implements ActionListener {
 				
 			case "Salir":
 				frame.dispose();
+				System.exit(0);
 				break;
 				
 			

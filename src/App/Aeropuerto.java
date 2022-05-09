@@ -49,28 +49,24 @@ public class Aeropuerto {
 	 */
 	public void ejecutarSolicitud() {
 		if(!aterri_prioridad.isEmpty()) {
-			/*JOptionPane.showMessageDialog(null, "Hay aviones con prioridad de aterrizaje");
-			opcion(aterri_prioridad,aterri_prioridad.peek(),"Aterrizaje de emergencia");*/
 			AutorizarPrioridad ventana_prio = new AutorizarPrioridad(aterri_prioridad,mi_regis); 
 			
 		}else {
 			if(alter == 1 && !despege.isEmpty()) {
-				//opcion(despege, despege.peek(), "despegar");
 				Autorizar ventana_des = new Autorizar(despege,mi_regis,"despegar"); 
 				
-				if(!aterri_prioridad.isEmpty())
+				if(!aterrizaje.isEmpty())
 					alter = 0;
 			}else if(alter == 0 && !aterrizaje.isEmpty()) {
-				//opcion(aterrizaje, aterrizaje.peek(), "aterrizar");
 				Autorizar ventana_ate = new Autorizar(aterrizaje,mi_regis,"aterrizar"); 
 				if(!despege.isEmpty())
 					alter = 1;
-			}else if(alter == 1 && aterrizaje.isEmpty() && !despege.isEmpty()) {
-				//opcion(despege, despege.peek(), "despegar");
+			}else if(alter == 0 && aterrizaje.isEmpty() && !despege.isEmpty()) {
 				Autorizar ventana_des = new Autorizar(despege,mi_regis,"despegar"); 
+				alter = 1;
 			}else if(alter == 1 && !aterrizaje.isEmpty() && despege.isEmpty()) {
-				//opcion(aterrizaje, aterrizaje.peek(), "aterrizar");
 				Autorizar ventana_ate = new Autorizar(aterrizaje,mi_regis,"aterrizar"); 
+				alter = 0;
 			}else if(despege.isEmpty() && aterrizaje.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "No quedan mas solicitudes");
 			}
@@ -110,22 +106,5 @@ public class Aeropuerto {
 			}
 				
 	}
-		
-	/*public Avion pedirDatos(String prodes) {
-		DatosVisual nuevoAvion = new DatosVisual(prodes);
-		
-		LocalDateTime tiempo = LocalDateTime.now();
-		String cod = JOptionPane.showInputDialog("Introduce un codigo:");
-		String procedencia = JOptionPane.showInputDialog("Introduce "+prodes+":");
-		String prio = null;
-		if(prodes.equals("Procedencia")) {
-			do {
-				prio = JOptionPane.showInputDialog("Tienes prioridad:(s/n)");
-			}while(!prio.equals("s") && !prio.equals("n"));
-		}else
-			prio = null;
-		return nuevoAvion.getAvion();
-		
-	}*/
 	
 }

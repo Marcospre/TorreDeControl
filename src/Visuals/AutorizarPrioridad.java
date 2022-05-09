@@ -45,6 +45,7 @@ public class AutorizarPrioridad implements ActionListener {
 	 */
 	public void menuAutori() {
 		
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setBounds(100, 100, 700, 300);
 		ventana.getContentPane().setLayout(new GridLayout(5, 2, 10, 10));
 		ventana.setLocationRelativeTo(null);
