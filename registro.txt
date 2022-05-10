@@ -1,3 +1,7 @@
-Operaciones del dia 2022-05-09
+Operaciones del dia 2022-05-10
 
-1 despegar                  2022/05/09 10:37:30
+2A Aterrizaje de emergencia  2022/05/10 08:56:31
+3A Aterrizaje de emergencia  2022/05/10 08:56:34
+1D despegar                  2022/05/10 08:56:40
+1A aterrizar                 2022/05/10 08:56:42
+2D despegar                  2022/05/10 08:56:44

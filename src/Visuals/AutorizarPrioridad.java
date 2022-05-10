@@ -47,7 +47,7 @@ public class AutorizarPrioridad implements ActionListener {
 		
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setBounds(100, 100, 700, 300);
-		ventana.getContentPane().setLayout(new GridLayout(5, 2, 10, 10));
+		ventana.getContentPane().setLayout(new GridLayout(4, 2, 10, 10));
 		ventana.setLocationRelativeTo(null);
 		
 		JLabel descrip1 = new JLabel("El avion con codigo "+avion.getCodigo_avion()+" procedente de "+avion.getProcedencia()+" desea Aterrizaje de emergencia");
